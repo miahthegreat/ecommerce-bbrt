@@ -54,7 +54,6 @@ const HeroBanner = ({ banner }) => {
             </p>
           </div>
         </section>
-        <Trending />
       </motion.div>
     </motion.div>
   );

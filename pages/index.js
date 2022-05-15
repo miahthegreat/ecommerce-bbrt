@@ -7,8 +7,9 @@ import { HeroBanner } from "../components";
 import MensSection from "../components/MensSection";
 import WomensSection from "../components/WomensSection";
 import { slideInFromBottom } from "../utils/transitionVariants";
+import Trending from "../components/Trending";
 
-export default function Home({ banner, mens, womens }) {
+export default function Home({ banner, mens, womens, newProducts }) {
   return (
     <motion.div
       className="mx-auto mt-[96px] flex max-w-7xl flex-col gap-8 md:mt-[104px]"
@@ -18,6 +19,7 @@ export default function Home({ banner, mens, womens }) {
       exit="exit"
     >
       <HeroBanner banner={banner.length && banner[0]} />
+      <Trending products={newProducts} />
       <MensSection products={mens} />
       <WomensSection products={womens} />
     </motion.div>
@@ -39,13 +41,17 @@ export const getServerSideProps = async () => {
   }
   `;
 
+  const newQuery = groq`
+  *[_type == "product"][0..2] | order(_createdAt desc)`;
+
   const mens = await client.fetch(mensQuery);
   const womens = await client.fetch(womensQuery);
+  const newProducts = await client.fetch(newQuery);
 
   const bannerQuery = '*[_type == "banner"]';
   const banner = await client.fetch(bannerQuery);
 
   return {
-    props: { banner, mens, womens },
+    props: { banner, mens, womens, newProducts },
   };
 };

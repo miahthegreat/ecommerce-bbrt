@@ -18,7 +18,7 @@ const Navbar = () => {
       animate="onscreen"
       exit="exit"
     >
-      <div className="group flex items-center gap-2 text-2xl font-thin md:text-4xl">
+      <div className="group flex items-center gap-2 text-base font-thin sm:text-2xl md:text-4xl">
         <span className="group-hover:text-gray-600 dark:group-hover:text-gray-300">
           <GiBuffaloHead />
         </span>
