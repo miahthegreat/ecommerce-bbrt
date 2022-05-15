@@ -121,11 +121,10 @@ const WomensSection = ({ products }) => {
         </div>
 
         <div className="mt-6 sm:hidden">
-          <Link
-            href="/shop/womens"
-            className="block text-sm font-semibold text-indigo-600 hover:text-indigo-500"
-          >
-            Browse all<span aria-hidden="true"> &rarr;</span>
+          <Link href="/shop/womens">
+            <a className="block text-sm font-semibold text-sky-600 hover:text-sky-500">
+              Browse all<span aria-hidden="true"> &rarr;</span>
+            </a>
           </Link>
         </div>
       </motion.div>
