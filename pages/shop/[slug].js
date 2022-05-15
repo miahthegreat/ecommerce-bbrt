@@ -8,8 +8,35 @@ import { groq } from "next-sanity";
 import TShirts from "../../components/Mens/TShirts";
 import { slideInFromBottom } from "../../utils/transitionVariants";
 
+const list = {
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      when: "beforeChildren",
+      staggerChildren: 0.3,
+      duration: 0.5,
+      bounce: 4.6,
+      type: "spring",
+    },
+  },
+  hidden: {
+    opacity: 0,
+    x: -75,
+    transition: {
+      when: "afterChildren",
+    },
+  },
+};
+
+const listItem = {
+  hidden: { opacity: 0, x: -50 },
+  visible: { opacity: 1, x: 0 },
+};
+
 const ShopByCategory = ({ products }) => {
   const router = useRouter();
+  const path = router.asPath;
   return (
     <motion.div
       className="mt-[96px] p-8 lg:mt-[104px]"
@@ -19,8 +46,14 @@ const ShopByCategory = ({ products }) => {
       exit="exit"
     >
       <nav className="flex" aria-label="Breadcrumb">
-        <ol role="list" className="flex items-center space-x-4">
-          <li>
+        <motion.ol
+          role="list"
+          className="flex items-center space-x-4"
+          variants={list}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.li variants={listItem}>
             <div>
               <Link href="/">
                 <a className="text-gray-400 hover:text-gray-500">
@@ -32,8 +65,8 @@ const ShopByCategory = ({ products }) => {
                 </a>
               </Link>
             </div>
-          </li>
-          <li>
+          </motion.li>
+          <motion.li variants={listItem}>
             <div className="flex items-center">
               <FiChevronRight
                 className="h-5 w-5 flex-shrink-0 text-gray-400"
@@ -45,8 +78,8 @@ const ShopByCategory = ({ products }) => {
                 </a>
               </Link>
             </div>
-          </li>
-        </ol>
+          </motion.li>
+        </motion.ol>
       </nav>
       <TShirts products={products} />
     </motion.div>

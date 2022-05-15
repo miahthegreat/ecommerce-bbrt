@@ -14,6 +14,32 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
+const list = {
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      when: "beforeChildren",
+      staggerChildren: 0.3,
+      duration: 0.5,
+      bounce: 4.6,
+      type: "spring",
+    },
+  },
+  hidden: {
+    opacity: 0,
+    x: -75,
+    transition: {
+      when: "afterChildren",
+    },
+  },
+};
+
+const listItem = {
+  hidden: { opacity: 0, x: -50 },
+  visible: { opacity: 1, x: 0 },
+};
+
 const ProductDetails = ({ product, relatedProducts }) => {
   const { image, name, details, price, category, slug } = product;
   const { incQty, decQty, qty, addToCart } = useStateContext();
@@ -35,8 +61,14 @@ const ProductDetails = ({ product, relatedProducts }) => {
     >
       <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
         <nav className="flex py-8" aria-label="Breadcrumb">
-          <ol role="list" className="flex items-center space-x-4">
-            <li>
+          <motion.ol
+            role="list"
+            className="flex items-center space-x-4"
+            variants={list}
+            initial="hidden"
+            animate="visible"
+          >
+            <motion.li variants={listItem}>
               <div>
                 <Link href="/">
                   <a className="text-gray-400 hover:text-gray-500">
@@ -48,8 +80,8 @@ const ProductDetails = ({ product, relatedProducts }) => {
                   </a>
                 </Link>
               </div>
-            </li>
-            <li>
+            </motion.li>
+            <motion.li variants={listItem}>
               <div className="flex items-center">
                 <FiChevronRight
                   className="h-5 w-5 flex-shrink-0 text-gray-400"
@@ -61,8 +93,8 @@ const ProductDetails = ({ product, relatedProducts }) => {
                   </a>
                 </Link>
               </div>
-            </li>
-            <li>
+            </motion.li>
+            <motion.li variants={listItem}>
               <div className="flex items-center">
                 <FiChevronRight
                   className="h-5 w-5 flex-shrink-0 text-gray-400"
@@ -74,8 +106,8 @@ const ProductDetails = ({ product, relatedProducts }) => {
                   </a>
                 </Link>
               </div>
-            </li>
-          </ol>
+            </motion.li>
+          </motion.ol>
         </nav>
         <div className="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
           <Tab.Group as="div" className="flex flex-col-reverse">
