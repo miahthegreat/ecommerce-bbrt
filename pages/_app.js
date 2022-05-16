@@ -10,7 +10,14 @@ function MyApp({ Component, pageProps, router }) {
   return (
     <StateContext>
       <Layout>
-        <Toaster />
+        <Toaster
+          toastOptions={{
+            style: {
+              "background-color": "rgb(3 105 161 / 1)",
+              color: "white",
+            },
+          }}
+        />
         <AnimatePresence
           exitBeforeEnter
           onExitComplete={() => {

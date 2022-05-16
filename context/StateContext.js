@@ -1,5 +1,14 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import { Transition } from "@headlessui/react";
+import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/outline";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  Fragment,
+} from "react";
 import { toast } from "react-hot-toast";
+import { FaRegWindowClose } from "react-icons/fa";
 
 const Context = createContext();
 
@@ -71,6 +80,7 @@ export const StateContext = ({ children }) => {
     );
     setTotalQuantities((prevTotalQuantities) => prevTotalQuantities + quantity);
     setQty(1);
+    // toast.success(`${qty} ${product.name} added to cart.`);
     toast.success(`${qty} ${product.name} added to cart.`);
   };
 
