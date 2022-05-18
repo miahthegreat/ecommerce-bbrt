@@ -1,5 +1,3 @@
-import { Transition } from "@headlessui/react";
-import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/outline";
 import React, {
   createContext,
   useContext,
@@ -8,7 +6,9 @@ import React, {
   Fragment,
 } from "react";
 import { toast } from "react-hot-toast";
-import { FaRegWindowClose } from "react-icons/fa";
+import { motion } from "framer-motion";
+import { FaCheckCircle } from "react-icons/fa";
+import { toastAn } from "../utils/transitionVariants";
 
 const Context = createContext();
 
@@ -80,8 +80,11 @@ export const StateContext = ({ children }) => {
     );
     setTotalQuantities((prevTotalQuantities) => prevTotalQuantities + quantity);
     setQty(1);
-    // toast.success(`${qty} ${product.name} added to cart.`);
-    toast.success(`${qty} ${product.name} added to cart.`);
+    if (qty === 1) {
+      toast.success(`${qty} item added to cart.`);
+    } else {
+      toast.success(`${qty} items added to cart.`);
+    }
   };
 
   const removeCartItem = (product) => {

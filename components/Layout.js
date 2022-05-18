@@ -15,16 +15,9 @@ const Layout = ({ children }) => {
         <Navbar />
       </header>
       <div className="px-4">{children}</div>
-      <motion.footer
-        className="mt-auto"
-        variant={slideInFromBottom}
-        initial="offscreen"
-        exit="exit"
-        whileInView="onscreen"
-        viewport={{ once: true, amount: 0.5 }}
-      >
+      <footer className="mt-auto">
         <Footer />
-      </motion.footer>
+      </footer>
     </div>
   );
 };

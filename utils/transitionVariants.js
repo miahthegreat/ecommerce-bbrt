@@ -9,7 +9,7 @@ export const slideInFromBottom = {
     transition: {
       type: "spring",
       bounce: 0.2,
-      duration: 0.8,
+      duration: 0.5,
     },
   },
   exit: {
@@ -44,6 +44,31 @@ export const container = {
     transition: {
       staggerChildren: 0.1,
       delayChildren: 0.3,
+    },
+  },
+};
+
+export const toastAn = {
+  onscreen: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      type: "tween",
+      duration: 0.2,
+    },
+  },
+  offscreen: {
+    opacity: 0,
+    y: -25,
+    scale: 0.9,
+  },
+  exit: {
+    opacity: 0,
+    scale: 0.9,
+    transition: {
+      type: "tween",
+      duration: 0.2,
     },
   },
 };
