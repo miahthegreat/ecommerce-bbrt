@@ -2,14 +2,13 @@ import React from "react";
 import { AnimatePresence } from "framer-motion";
 import Layout from "../components/Layout";
 import "../styles/globals.css";
-
 import { StateContext } from "../context/StateContext";
 import { Toaster } from "react-hot-toast";
 
 function MyApp({ Component, pageProps, router }) {
   return (
     <StateContext>
-      <Layout>
+      <Layout data={pageProps}>
         <Toaster
           toastOptions={{
             style: {

@@ -1,14 +1,5 @@
-import React, {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  Fragment,
-} from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 import { toast } from "react-hot-toast";
-import { motion } from "framer-motion";
-import { FaCheckCircle } from "react-icons/fa";
-import { toastAn } from "../utils/transitionVariants";
 
 const Context = createContext();
 

@@ -40,7 +40,7 @@ const listItem = {
   visible: { opacity: 1, x: 0 },
 };
 
-const ProductDetails = ({ product, relatedProducts }) => {
+const ProductDetails = ({ product, relatedProducts, products }) => {
   const { image, name, details, price, category, slug } = product;
   const { incQty, decQty, qty, addToCart } = useStateContext();
   const alsoLikedProducts = relatedProducts.filter((item) => {
@@ -252,8 +252,14 @@ export const getStaticProps = async ({ params: { slug } }) => {
   }`;
   const product = await client.fetch(query);
 
+  const queryAll = `*[_type == "product"]{
+    ...,
+    category[]->
+  }`;
+  const products = await client.fetch(queryAll);
+
   const alsoLiked = groq`
-  *[_type == "product"][0...6] | order(_createdAt asc) {
+  *[_type == "product"][0...5] | order(_createdAt asc) {
       ...,
       category[]->
   }
@@ -262,6 +268,6 @@ export const getStaticProps = async ({ params: { slug } }) => {
   const relatedProducts = await client.fetch(alsoLiked);
 
   return {
-    props: { product, relatedProducts },
+    props: { product, relatedProducts, products },
   };
 };
